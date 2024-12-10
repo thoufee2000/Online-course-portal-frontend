@@ -1,0 +1,179 @@
+/* Container Styling */
+.enrollment-container {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    overflow-x: auto;
+  }
+  
+  /* Table Styling */
+  .styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+    color: #333;
+  }
+  
+  /* Header Row Styling */
+  .styled-table thead tr {
+    background-color: #007bff;
+    color: #ffffff;
+    text-align: left;
+    font-weight: bold;
+  }
+  
+  .styled-table th,
+  .styled-table td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+  }
+  
+  /* Table Body Styling */
+  .styled-table tbody tr {
+    background-color: #f9f9f9;
+    transition: background-color 0.2s ease;
+  }
+  
+  /* Hover Effect for Rows */
+  .styled-table tbody tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  /* Alternate Row Coloring */
+  .styled-table tbody tr:nth-child(even) {
+    background-color: #f3f3f3;
+  }
+  
+  /* Button Styling */
+  .delete-btn {
+    padding: 6px 12px;
+    background-color: #dc3545;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .delete-btn:hover {
+    background-color: #c82333;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .styled-table th,
+    .styled-table td {
+      font-size: 14px;
+      padding: 8px 10px;
+    }
+  }
+  /* General Dropdown Styling */
+  .action-dropdown {
+    padding: 8px 12px;
+    font-size: 15px;
+    font-family: Arial, sans-serif;
+    color: #444;
+    border: 2px solid #e0e0e0;
+    border-radius: 6px;
+    background-color: #ffffff;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  /* Focus Style */
+  .action-dropdown:focus {
+    border-color: #4caf50;
+    outline: none; /* Removes default browser outline */
+    box-shadow: 0 0 6px rgba(76, 175, 80, 0.5);
+  }
+  
+  /* Hover Effect */
+  .action-dropdown:hover {
+    border-color: #999;
+    background-color: #f9f9f9;
+  }
+  
+  /* Disabled Option Styling */
+  .action-dropdown option[disabled] {
+    color: #aaa;
+  }
+  
+  /* Placeholder Option */
+  .action-dropdown option[value=""] {
+    font-style: italic;
+    color: #666;
+  }
+  
+  /* Responsive Width (Optional) */
+  .action-dropdown {
+    max-width: 300px; /* Limit width for larger screens */
+    width: 100%; /* Fit to container */
+  }
+  
+  /* Optional: Custom Arrow Styling */
+  .action-dropdown {
+    background-image: linear-gradient(45deg, transparent 50%, #444 50%),
+      linear-gradient(135deg, #444 50%, transparent 50%);
+    background-position: calc(100% - 20px) calc(1em + 1px),
+      calc(100% - 15px) calc(1em + 1px);
+    background-size: 5px 5px, 5px 5px;
+    background-repeat: no-repeat;
+  }
+  .floating-button-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000; /* Ensures it appears on top */
+  }
+  
+  .floating-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 14px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+  }
+  
+  .floating-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .floating-button:active {
+    background-color: #003f7f;
+  }
+  .enroll-btn {
+    background-color: #007bff; /* Primary Blue */
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Hover State */
+.enroll-btn:hover {
+    background-color: #0056b3; /* Darker Blue */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Active State */
+.enroll-btn:active {
+    background-color: #004085; /* Even Darker Blue */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Focus State */
+.enroll-btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5); /* Focus Ring */
+}

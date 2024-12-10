@@ -1,0 +1,39 @@
+<body>
+    <!-- Navbar Component -->
+    <header class="navbar">
+        <div class="navbar-container">
+            <h1 class="navbar-title">Course Management</h1>
+            <div class="navbar-actions" style="margin-right: 200px;">
+                <button class="btn enroll-btn" (click)="addCourse()">Add Course</button>
+                <button class="btn enroll-btn" (click)="enrollList()">Enroll List</button>
+                <button class="btn logout-btn" (click)="logout()">Logout</button>
+            </div>
+        </div>
+        <form [formGroup]="searchForm">
+            <div class="navbar-actions">
+                <input type="text" class="search-input" placeholder="Search courses" formControlName="searchTerm" (input)="searchCourses()"/>
+            </div>
+        </form>
+    </header>
+
+    <!-- Main Content -->
+    <main class="course-container">
+        <div class="course-card" *ngFor="let course of filteredCourses">
+            <img [src]="getImageUrl(course.courseThumb)" alt="{{course.courseTitle}} Image" class="course-image"
+                (error)="handleImageError($event)" />
+            <div class="course-details">
+                <h2 class="course-title">{{course.courseTitle}}</h2>
+                <p class="course-description">{{course.courseDesc}}</p>
+                <p class="course-category"><strong>Category:</strong> {{course.category}}</p>
+                <div class="course-actions">
+                    <button class="btn update-btn" (click)="updateCourse(course.id)">Update</button>
+                    <button class="btn delete-btn" (click)="deleteCourse(course.id)">Delete</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div *ngIf="filteredCourses.length === 0" class="no-courses-message">
+        <h1>No Courses Found</h1>
+    </div>
+</body>

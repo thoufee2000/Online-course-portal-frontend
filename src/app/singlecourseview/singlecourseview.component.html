@@ -1,0 +1,17 @@
+<div>
+    <main class="course-container">
+        <div class="course-card">
+            <img [src]="getImageUrl(currentCourse.courseThumb)" alt="{{currentCourse.courseTitle}} Image"
+                class="course-image" />
+            <div class="course-details">
+                <h2 class="course-title">{{currentCourse.courseTitle}}</h2>
+                <p class="course-description">{{currentCourse.courseDesc}}</p>
+                <!-- <p class="course-category"><strong>Category:</strong> {{currentCourse.category}}</p> -->
+                <div class="course-actions">
+                    <button class="btn update-btn" (click)="courseEnroll()">Enroll</button>
+                    <button class="btn delete-btn" (click)="goBack()">Back</button>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>

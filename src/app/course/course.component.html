@@ -1,0 +1,63 @@
+<div class="floating-button-container">
+    <button class="floating-button" (click)="viewCourses()">View Courses</button>
+</div>
+
+<div class="container">
+    <h1>Add Course</h1>
+    <form id="courseForm" [formGroup]="courseForm" (ngSubmit)="onSubmit()">
+        <!-- Course Title -->
+        <div class="form-group">
+            <label for="courseTitle"><span style="color: red;">*</span>Course Title</label>
+            <input type="text" id="courseTitle" formControlName="courseTitle" placeholder="Enter course title">
+            <div class="invalid-feedback"
+                *ngIf="courseForm.get('courseTitle')?.invalid && courseForm.get('courseTitle')?.touched" >
+                *This field is required
+            </div>
+        </div>
+
+        <!-- Course Description -->
+        <div class="form-group">
+            <label for="courseDesc"><span style="color: red;">*</span>Course Description</label>
+            <textarea id="courseDesc" formControlName="courseDesc" placeholder="Enter course description"></textarea>
+            <div class="invalid-feedback" *ngIf="courseForm.get('courseDesc')?.invalid && courseForm.get('courseDesc')?.touched">
+                *This field is required
+            </div>
+        </div>
+
+        <!-- Course Category -->
+        <div class="form-group">
+            <label for="category"><span style="color: red;">*</span>Category</label>
+            <select id="category" formControlName="category">
+                <option value="" disabled>Select a category</option>
+                <option *ngFor="let category of allCategories" [value]="category.id">
+                    {{category.category}}
+                </option>
+            </select>
+            <div ngClass="invalid-feedback" *ngIf="courseForm.get('category')?.invalid && courseForm.get('category')?.touched">
+                *This feild is required
+            </div>
+        </div>
+
+        <!-- Course Thumbnail -->
+        <div class="form-group">
+            <label for="courseThumb"><span style="color: red;">*</span>Course Thumbnail</label>
+            <input type="file" id="courseThumb" (change)="onFileSelected($event)" accept=".jpg,.jpeg,.png">
+            <div class="invalid-feedback" *ngIf="courseForm.get('courseThumb')?.invalid && courseForm.get('courseThumb')?.touched">
+                *This field is required
+            </div>
+        </div>
+        <div class="invalid-feedback" *ngIf="courseForm.invalid">
+            *Please fill all the required fields
+        </div>
+        <br><br>
+        <!-- Buttons -->
+        <div class="buttons" *ngIf="courseForm.valid">
+            <button type="submit" class="add-btn">Add</button>
+            <!-- <button type="button" class="update-btn" (click)="viewCourses()">View Courses</button> -->
+            
+        </div>
+    </form>
+    <div class="alert">
+        Note: Please fill out all the fields before submitting.
+    </div>
+</div>

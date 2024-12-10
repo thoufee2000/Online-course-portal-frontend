@@ -1,0 +1,60 @@
+<body>
+    <!-- Navbar Component -->
+    <header class="navbar">
+        <div class="navbar-container">
+            <h1 class="navbar-title">Course Management</h1>
+            <div>
+                <button class="btn enroll-btn" (click)="enrollmentList()">Enroll list</button>
+            </div>
+            <form [formGroup]="searchForm">
+                <div class="navbar-actions">
+                    <input type="text" class="search-input" placeholder="Search courses" formControlName="searchTerm"/>
+                    <button class="btn add-btn" (click)="searchCourses()">Search</button>
+                    
+                    <!-- Logout Button in Navbar -->
+                    <button class="btn logout-btn" (click)="logout()">
+                         Logout
+                    </button>
+                </div>
+            </form>
+        </div>
+    </header>
+
+    <!-- Filter by Category -->
+    <form [formGroup]="categoryFilterForm">
+        <section class="category-filter">
+            <h2>Filter by Category:</h2>
+            <div class="category-options">
+                <label *ngFor="let cat of allCategories" class="category-label">
+                    <input type="checkbox" name="category" formControlName="category" [value]="cat.id" (change)="filterByCategory(cat.category)"/>
+                    {{cat.category}}
+                </label>
+                <label class="category-label">
+                    <input type="checkbox" name="category" value="all" (change)="filterByCategory('all')" formControlName="categoryAll" />
+                    All
+                </label>
+            </div>
+        </section>
+    </form>
+
+    <!-- Main Content -->
+    <main class="course-container">
+        <div class="course-card" *ngFor="let course of filteredCourses">
+            <img [src]="getImageUrl(course.courseThumb)" alt="{{course.courseTitle}} Image" class="course-image"
+                (error)="handleImageError($event)" />
+            <div class="course-details">
+                <h2 class="course-title">{{course.courseTitle}}</h2>
+                <p class="course-category"><strong>Category:</strong> {{course.category}}</p>
+                <div class="course-actions">
+                    <button class="btn update-btn" (click)="viewCourse(course.id)">Details</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div *ngIf="filteredCourses.length === 0" class="no-courses-message">
+        <h1>No Courses Found</h1>
+    </div>
+
+    
+</body>

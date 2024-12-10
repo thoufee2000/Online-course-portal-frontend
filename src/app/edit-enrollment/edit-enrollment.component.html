@@ -1,0 +1,54 @@
+<div class="floating-button-container">
+    <button type="button" class="floating-button" (click)="goBack()">Back</button>
+</div>
+
+<div class="container">
+    <h1>Update Course</h1>
+    <form id="enrollForm" [formGroup]="enrollForm" (ngSubmit)="onSubmit()">
+        <!-- Course Title -->
+        <div class="form-group">
+            <label for="name"><span style="color: red;">*</span>Name</label>
+            <input type="text" id="courseTitle" formControlName="name" placeholder="Enter course title">
+            <div class="invalid-feedback"
+                *ngIf="enrollForm.get('name')?.invalid && enrollForm.get('name')?.touched" >
+                *This field is required
+            </div>
+        </div>
+
+        <!-- Course Description -->
+        <div class="form-group">
+            <label for="course"><span style="color: red;">*</span>Course</label>
+            <textarea id="courseDesc" formControlName="course" placeholder="Enter course description"></textarea>
+            <div class="invalid-feedback" *ngIf="enrollForm.get('course')?.invalid && enrollForm.get('course')?.touched">
+                *This field is required
+            </div>
+        </div>
+
+        <!-- Course enrolled -->
+        <div class="form-group">
+            <label for="enrollDate"><span style="color: red;">*</span>Enrolled Date</label>
+            <input type="date" id="" formControlName="enrollDate" class="form-control">
+            <div ngClass="invalid-feedback" *ngIf="enrollForm.get('enrollDate')?.invalid && enrollForm.get('enrollDate')?.touched">
+                *This feild is required
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="status"><span style="color: red;">*</span>Status</label>
+            <select formControlName="status">
+                <option value=null>Suspended</option>
+                <option value='true'>Inprogress</option>
+                <option value='false'>Completed</option>
+            </select>
+
+        </div>
+        
+        <div class="invalid-feedback">
+            *requires fields
+        </div>
+        <div *ngIf="enrollForm.valid" class="buttons">
+            <button type="submit" class="add-btn">Update</button>
+        </div>
+    </form>
+    
+</div>

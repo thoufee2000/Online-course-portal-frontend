@@ -1,0 +1,158 @@
+<div class="floating-button-container">
+    <button class="floating-button" (click)="goToLogin()">
+        Login
+    </button>
+</div>
+
+<form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+
+    <h1>User Registration</h1>
+    <!-- Personal Information -->
+    <div class="form-group">
+        <label for="fullName"><span style="color: red;">*</span>Full Name</label>
+        <input type="text" id="fullName" formControlName="fullName" class="form-control">
+        <div class="invalid-feedback"
+            *ngIf="registrationForm.get('fullName')?.touched && registrationForm.get('fullName')?.errors?.['whiteSpaceAtStartAndNumbers']">*Full Name is
+            required & No numbers included</div>
+    </div>
+
+    <div class="form-group">
+        <label for="email"><span style="color: red;">*</span>Email Address</label>
+        <input type="email" id="email" formControlName="email" class="form-control">
+        <div class="invalid-feedback"
+            *ngIf="registrationForm.get('email')?.touched && registrationForm.get('email')?.invalid">*Email is required
+        </div>
+        <div class="invalid-feedback"
+            *ngIf="registrationForm.get('email')?.touched && registrationForm.get('email')?.errors?.['invalidEmail']">
+            *Invalid Email</div>
+    </div>
+
+    <div class="form-group">
+        <label for="phoneNumber"><span style="color: red;">*</span>Phone Number</label>
+        <input type="tel" id="phoneNumber" formControlName="phoneNumber" class="form-control">
+        <div class="invalid-feedback">
+            <div *ngIf="registrationForm.get('phoneNumber')?.invalid && registrationForm.get('phoneNumber')?.touched">
+                *Phone Number is required</div>
+            <div *ngIf="registrationForm.get('phoneNumber')?.errors?.['invalidPhoneNumber']">
+                *Phone Number must be 10 digits
+            </div>
+        </div>
+    </div>
+
+    <!-- Password Fields -->
+    <div class="form-group">
+        <label for="password"><span style="color: red;">*</span>Password</label>
+        <input type="password" id="password" formControlName="password" class="form-control">
+        <div class="invalid-feedback">
+            <div *ngIf="registrationForm.get('password')?.invalid && registrationForm.get('password')?.touched">
+                *Password is required</div>
+            <div *ngIf="registrationForm.get('password')?.errors?.['invalidPassword']">
+                *Password must contain at least one uppercase, one lowercase,
+                one number, and one special character
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="confirmPassword"><span style="color: red;">*</span>Confirm Password</label>
+        <input type="password" id="confirmPassword" formControlName="confirmPassword" class="form-control">
+        <div class="invalid-feedback">
+            <div
+                *ngIf="registrationForm.get('confirmPassword')?.touched && registrationForm.get('confirmPassword')?.value !== registrationForm.get('password')?.value">
+                *Passwords do not match
+            </div>
+        </div>
+    </div>
+
+    <!-- Dropdown Fields -->
+    <div class="form-group">
+        <label for="gender"><span style="color: red;">*</span>Gender</label>
+        <select id="gender" formControlName="gender" class="form-control">
+            <option *ngFor="let gen of gender" [value]="gen.value">{{gen.value}}</option>
+        </select>
+        <div class="invalid-feedback"
+            *ngIf="registrationForm.get('gender')?.touched && registrationForm.get('gender')?.invalid">*Gender is
+            required</div>
+    </div>
+
+    <!-- State Dropdown -->
+<div class="form-group">
+    <label for="state"><span style="color: red;">*</span>State</label>
+    <select id="state" formControlName="state" class="form-control" (change)="getStates()">
+      <!-- <option value="" disabled selected>Select State</option> -->
+      <option [value]="state.id" *ngFor="let state of states">{{ state.state }}</option>
+    </select>
+    <div class="invalid-feedback" *ngIf="registrationForm.get('state')?.touched && registrationForm.get('state')?.invalid">
+      *State is required
+    </div>
+  </div>
+  
+  <!-- City Dropdown -->
+  <div class="form-group">
+    <label for="city"><span style="color: red;">*</span>City</label>
+    <select id="city" formControlName="city" class="form-control">
+      <!-- <option value="">Select City</option> -->
+      <option [value]="city.id" *ngFor="let city of currentCities">{{ city.city }}</option>
+    </select>
+    <div class="invalid-feedback" *ngIf="registrationForm.get('city')?.touched && registrationForm.get('city')?.invalid">
+      *City is required
+    </div>
+  </div>
+  
+
+
+    <!-- Date of Birth -->
+    <div class="form-group">
+        <label for="dateOfBirth">Date of Birth</label>
+        <input type="date" id="dateOfBirth" formControlName="dateOfBirth" class="form-control">
+        <div *ngIf="minimumAgeValidator(18)" class="invalid-feedback">
+            <!-- *You must be at least 18 years old -->
+        </div>
+        <div class="invalid-feedback" *ngIf="registrationForm.get('dateOfBirth')?.errors?.['minimumAge']">
+            *You must be at least 18 years old
+        </div>
+    </div>
+
+    <!-- File Upload -->
+    <div class="form-group">
+        <label for="profilePicture">Profile Picture</label>
+        <input type="file" id="profilePicture" class="form-control-file" accept=".jpg,.jpeg,.png" 
+               (change)="onFileSelected($event)">
+        <div class="invalid-feedback" *ngIf="registrationForm.get('profilePicture')?.touched && registrationForm.get('profilePicture')?.invalid">
+            *Please select a valid file
+        </div>
+    </div>
+    
+
+    <!-- Terms and Conditions -->
+    <div class="form-group">
+        <div class="form-check">
+            <input type="checkbox" id="termsAndConditions" formControlName="termsAndConditions"
+                class="form-check-input">
+
+            <b><span style="color: red;">*</span>I accept the Terms and Conditions</b>
+            <div *ngIf="registrationForm.get('termsAndConditions')?.touched && registrationForm.get('termsAndConditions')?.invalid"
+                class="invalid-feedback">
+                *You must accept the Terms and Conditions
+            </div>
+        </div>
+    </div>
+    <br><br>
+    <div *ngIf="registrationForm.invalid">
+        <span style="color: red;">*Required Fields</span>
+    </div>
+    <br>
+
+    <!-- Buttons -->
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">
+            Submit
+        </button>
+        <button type="button" class="btn btn-secondary ml-2" (click)="resetForm()">
+            Reset
+        </button>
+    </div>
+
+    <div class="message-box" id="messageBox" *ngIf="message">
+        {{message.message}}
+    </div>

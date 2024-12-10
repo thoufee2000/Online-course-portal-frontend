@@ -1,0 +1,69 @@
+<div>
+    <form [formGroup]="enrollmentForm">
+        <select class="action-dropdown" (change)="onCourseChange()" formControlName="course">
+            <option value="" selected>All</option>
+            <option value="view" *ngFor="let course of allCourses"  [value]="course.id">{{course.courseTitle}}</option>
+          </select>
+        
+    </form>
+    <div class="floating-button-container">
+      <button class="floating-button" (click)="goBack()">Back</button>
+    </div>
+</div>
+
+
+<div class="enrollment-container">
+    <table class="styled-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Course</th>
+          <th>Enrollment Date</th>
+          <th>Status</th>
+          <th>Update</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="filteredEnrollmentList.length < 1">
+        <tr *ngFor="let enrollment of enrollmentList">
+          <td>{{ enrollment.user }}</td>
+          <td>{{ enrollment.course }}</td>
+          <td>{{ enrollment.enrollmentDate }}</td>
+          <td *ngIf="enrollment.status === 'true'">In Progress</td>
+          <td *ngIf="enrollment.status === 'false'">Completed</td>
+          <td *ngIf="enrollment.status === 'null' ">Suspended</td>
+          <td>
+            <button class="update-btn" (click)="updateEnrollment(enrollment.id)">Update</button>
+          </td>
+          <td>
+            <button class="delete-btn" (click)="deleteEnrollment(enrollment.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+      <tbody *ngIf="filteredEnrollmentList.length > 0">
+        <tr *ngFor="let enrollment of filteredEnrollmentList">
+          <td>{{ enrollment.user }}</td>
+          <td>{{ enrollment.courseTitle }}</td>
+          <td>{{ enrollment.enrollmentDate }}</td>
+          <td *ngIf="enrollment.status === 'true'">In Progress</td>
+          <td *ngIf="enrollment.status === 'false'">Completed</td>
+          <td *ngIf="enrollment.status === 'null' ">Suspended</td>
+          <td>
+            <button class="update-btn" (click)="updateEnrollment(enrollment.id)">Update</button>
+          </td>
+          <td>
+            <button class="delete-btn" (click)="deleteEnrollment(enrollment.id)">Delete</button>
+          </td>
+        </tr>
+        
+      </tbody>
+      <tbody>
+        <tr *ngIf="message">
+          <td colspan="5">No enrollments found for the selected course.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+  
